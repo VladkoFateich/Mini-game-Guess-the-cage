@@ -1,19 +1,30 @@
+const txtArr = [
+  'Старт',
+  'Новая игра',
+  'Игра угадай ячейку',
+  'Дана таблица 10 на 10. По нажатию на кнопку старт компьютер случайным образом запоминает 10 ячеек из этой таблицы. Игроку нужно кликать на клетки пока он не найдет все загаданные компьютером клетки, после нажатия на кнопку старт поле очищается игра начинается заново',
+  'Ход: ',
+];
 const wrapper = document.querySelector('#wrapper');
 const btnGenerate = document.createElement('button');
 const btnNewGame = document.createElement('button');
-btnGenerate.textContent = 'START';
-btnNewGame.textContent = 'NEW GAME';
-wrapper.append(btnGenerate);
-wrapper.append(btnNewGame);
-
-createTable(10, 10, wrapper);
-// createBtns(wrapper);
-const tds = document.querySelectorAll('td');
+const title = document.createElement('h1');
+const subTitle = document.createElement('p');
 
 let arr = [];
-let count = 0;
 
-console.log(tds);
+for (let i = 0; i <= txtArr.length; i++) {
+  btnGenerate.textContent = txtArr[0];
+  btnNewGame.textContent = txtArr[1];
+  title.textContent = txtArr[2];
+  subTitle.textContent = txtArr[3];
+  wrapper.append(title);
+  wrapper.append(subTitle);
+  wrapper.append(btnGenerate);
+  wrapper.append(btnNewGame);
+}
+createTable(10, 10, wrapper);
+const tds = document.querySelectorAll('td');
 
 btnNewGame.addEventListener('click', restartGame);
 function restartGame() {
@@ -24,6 +35,7 @@ function restartGame() {
   btnGenerate.addEventListener('click', start);
 }
 btnGenerate.addEventListener('click', start);
+
 function start() {
   for (let i = 0; i < tds.length; i++) {
     tds[i].addEventListener('click', function () {
@@ -32,31 +44,19 @@ function start() {
       } else {
         tds[i].style.background = 'red';
       }
-      // console.log(i);
     });
   }
+  console.log(arr);
+
   for (let i = 0; i < 10; i++) {
     arr.push(getArrayRandom(1, 100));
     this.removeEventListener('click', start);
   }
-  console.log(arr);
 }
 
 function getArrayRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-// function createBtns(parent) {
-//   const btnGenerate = document.createElement('button');
-//   const btnNewGame = document.createElement('button');
-//   btnGenerate.textContent = 'START';
-//   btnNewGame.textContent = 'NEW GAME';
-//   parent.append(btnGenerate);
-//   parent.append(btnNewGame);
-
-//   btnGenerate.addEventListener('click', start);
-//   btnNewGame.addEventListener('click', restartGame);
-// }
 
 function createTable(rows, cols, parent) {
   let table = document.createElement('table');
