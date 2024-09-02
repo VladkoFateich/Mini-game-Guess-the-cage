@@ -99,7 +99,7 @@ function startTimer() {
 //   btnGenerate.addEventListener('click', start);
 // }
 function restartGame() {
-  // timer.textContent = '';
+  count = 1;
   arr = [];
   btnGenerate.addEventListener('click', start);
 }
